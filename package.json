@@ -1,0 +1,23 @@
+{
+  "name": "deply",
+  "version": "0.1.0",
+  "description": "Deployment manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rschmukler/deply"
+  },
+  "keywords": [
+    "deploy",
+    "azure"
+  ],
+  "author": "Ryan Schmukler <ryan@slingingcode.com> (http://slingingcode.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rschmukler/deply/issues"
+  },
+  "homepage": "https://github.com/rschmukler/deply"
+}
