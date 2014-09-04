@@ -1,7 +1,8 @@
 #! /usr/bin/env node
 
 var deploy = require('commander'),
-    utils = require('../lib/utils');
+    utils = require('../lib/utils'),
+    Deployment = require('../lib/deployment.js');
 
 deploy.usage('<environment> [commit-ref/tag]');
 
@@ -19,5 +20,10 @@ var env = deploy.args.shift();
 var configPath = deploy.config || process.cwd() + '/deply.conf.json';
 
 var config = utils.readConfigFor(env, configPath);
+config.args = deploy.args;
 
-console.log(config);
+var deployment = new Deployment(config);
+
+deployment.deploy(function(err) {
+  if(err) utils.errorAndExit(err);
+});
