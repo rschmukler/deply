@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/rschmukler/deply",
   "dependencies": {
+    "azure-storage": "^0.3.3",
     "chalk": "^0.5.1",
     "commander": "^2.3.0",
     "extend": "^1.3.0",
