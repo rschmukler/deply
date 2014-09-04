@@ -1,0 +1,41 @@
+#! /usr/bin/env node
+
+var exists = require('fs').existsSync,
+    join = require('path').join,
+    spawn = require('child_process').spawn;
+
+var deply = require('commander');
+
+deply
+  .version(require('../package').version)
+  .usage('<command> [options]');
+
+deply.on('--help', function() {
+  console.log('Commands:');
+  console.log();
+  console.log('   deploy       do a deployment');
+  console.log('   revert       undo a deployment');
+  process.exit();
+});
+
+deply.parse(process.argv);
+
+var args = process.argv.slice(3);
+
+var cmd = deply.args[0];
+
+if(!cmd) deply.help();
+
+var bin = 'deply-' + cmd,
+    local = join(__dirname, bin);
+
+if(exists(local)) {
+  bin = local;
+} else {
+  console.error('\n command %s does not exist', bin);
+  deply.help();
+}
+
+var proc = spawn(bin, args, { stdio: 'inherit', customFds: [0, 1, 2] });
+
+proc.on('close', process.exit);

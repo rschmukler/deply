@@ -1,0 +1,23 @@
+#! /usr/bin/env node
+
+var deploy = require('commander'),
+    utils = require('../lib/utils');
+
+deploy.usage('<environment> [commit-ref/tag]');
+
+deploy.option('-c, --config', 'configuration file, defaults to ./deply.conf.json');
+
+deploy.parse(process.argv);
+
+if(deploy.args.length < 1) {
+  deploy.help();
+  process.exit();
+}
+
+var env = deploy.args.shift();
+
+var configPath = deploy.config || process.cwd() + '/deply.conf.json';
+
+var config = utils.readConfigFor(env, configPath);
+
+console.log(config);
